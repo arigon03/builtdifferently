@@ -2,9 +2,13 @@
 (function () {
   "use strict";
 
-  // Digistore24-Kauflink hier eintragen. Dann führen alle Kauf-Buttons direkt zur Kasse.
-  var KAUFLINK = "https://www.checkout-ds24.com/product/752800";
+  // Digistore24-Kauflink. Die deutsche Seite nutzt den Standard, die englische setzt data-buy auf <html>.
+  var root = document.documentElement;
+  var KAUFLINK = root.hasAttribute("data-buy")
+    ? root.getAttribute("data-buy")
+    : "https://www.checkout-ds24.com/product/752800";
   var KONTAKT = "builtdifferently.book@gmail.com";
+  var EN = (root.getAttribute("lang") || "").indexOf("en") === 0;
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var portraitQuery = window.matchMedia("(orientation: portrait) and (max-width: 1024px)");
@@ -42,7 +46,9 @@
         var note = document.createElement("p");
         note.className = "kauf-hinweis";
         note.setAttribute("role", "status");
-        note.appendChild(document.createTextNode("Der Verkauf startet in Kürze. Fragen an "));
+        note.appendChild(
+          document.createTextNode(EN ? "Sales open very soon. Questions to " : "Der Verkauf startet in Kürze. Fragen an ")
+        );
         var mail = document.createElement("span");
         mail.textContent = KONTAKT;
         note.appendChild(mail);

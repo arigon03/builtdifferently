@@ -152,6 +152,26 @@ img {
   color: var(--bd-ink);
 }
 
+.bd-nav > a.bd-lang {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 40px;
+  box-sizing: border-box;
+  padding: 0 0 0 0.16em;
+  border: 1px solid color-mix(in srgb, var(--bd-gold) 45%, transparent);
+  color: var(--bd-ink);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+.bd-nav > a.bd-lang:hover {
+  border-color: var(--bd-gold);
+  color: var(--bd-gold);
+}
+
 .bd-cta-header {
   display: flex;
   align-items: center;
@@ -166,6 +186,22 @@ img {
 }
 .bd-cta-header:hover {
   background: var(--bd-gold-hi);
+}
+.bd-cta-header {
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .bd-nav {
+    gap: 4px 8px;
+  }
+  .bd-brand {
+    letter-spacing: 0.2em;
+  }
+  .bd-cta-header {
+    padding: 0 12px 0 calc(12px + 0.12em);
+    letter-spacing: 0.12em;
+  }
 }
 
 @media (min-width: 768px) {
