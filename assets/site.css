@@ -1,0 +1,606 @@
+/* Built Differently: a confidential dossier opened at night in Zurich.
+   Near-black desk, brass-lamp gold, aged paper, one red stamp. Dark only, by design. */
+
+@font-face {
+  font-family: "EB Garamond";
+  src: url("fonts/EBGaramond.woff2") format("woff2");
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "EB Garamond";
+  src: url("fonts/EBGaramond-Italic.woff2") format("woff2");
+  font-weight: 400 800;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Oswald";
+  src: url("fonts/Oswald.woff2") format("woff2");
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Playfair Display";
+  src: url("fonts/PlayfairDisplay.woff2") format("woff2");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Playfair Display";
+  src: url("fonts/PlayfairDisplay-Italic.woff2") format("woff2");
+  font-weight: 400 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  --bd-bg: #0e1013;
+  --bd-ink: #efe8da;
+  --bd-muted: #cfc7b7;
+  --bd-gold: #c9a227;
+  --bd-gold-hi: #e0be4a;
+  --bd-stamp: #d0574a;
+  --bd-paper-ink: #3a2f14;
+  --bd-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --bd-body: "EB Garamond", Georgia, "Times New Roman", serif;
+  --bd-label: Oswald, "Arial Narrow", "Helvetica Neue", sans-serif;
+  --bd-header-h: 64px;
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bd-bg);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bd-bg);
+  color: var(--bd-ink);
+  font-family: var(--bd-body);
+}
+
+img {
+  max-width: 100%;
+}
+
+.bd-site {
+  overflow-x: clip;
+}
+
+.bd-site [id] {
+  scroll-margin-top: calc(var(--bd-header-h) + 8px);
+}
+
+.bd-site a:focus-visible,
+.bd-site button:focus-visible {
+  outline: 2px solid var(--bd-gold);
+  outline-offset: 3px;
+}
+
+.bd-skip {
+  position: absolute;
+  left: 16px;
+  top: -60px;
+  z-index: 60;
+  padding: 10px 14px;
+  background: var(--bd-gold);
+  color: var(--bd-bg);
+  font-family: var(--bd-label);
+  letter-spacing: 0.12em;
+  text-decoration: none;
+}
+.bd-skip:focus {
+  top: calc(env(safe-area-inset-top, 0px) + 8px);
+}
+
+/* ---------- header ---------- */
+.bd-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-sizing: border-box;
+  min-height: calc(var(--bd-header-h) + env(safe-area-inset-top, 0px));
+  padding: env(safe-area-inset-top, 0px) max(16px, env(safe-area-inset-right, 0px)) 0
+    max(16px, env(safe-area-inset-left, 0px));
+  background: color-mix(in srgb, var(--bd-bg) 84%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--bd-gold) 18%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.bd-brand {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--bd-gold);
+  font-family: var(--bd-label);
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.bd-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px 28px;
+  font-family: var(--bd-label);
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.bd-nav > a:not(.bd-cta-header) {
+  display: none;
+  align-items: center;
+  min-height: 44px;
+  color: var(--bd-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.bd-nav > a:not(.bd-cta-header):hover {
+  color: var(--bd-ink);
+}
+
+.bd-cta-header {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 14px 0 calc(14px + 0.18em);
+  background: var(--bd-gold);
+  color: var(--bd-bg);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.bd-cta-header:hover {
+  background: var(--bd-gold-hi);
+}
+
+@media (min-width: 768px) {
+  .bd-header {
+    padding-right: max(clamp(20px, 4vw, 48px), env(safe-area-inset-right, 0px));
+    padding-left: max(clamp(20px, 4vw, 48px), env(safe-area-inset-left, 0px));
+  }
+  .bd-brand {
+    font-size: 13px;
+    letter-spacing: 0.4em;
+  }
+  .bd-nav > a:not(.bd-cta-header) {
+    display: flex;
+  }
+  .bd-cta-header {
+    min-height: 44px;
+    padding: 0 20px 0 calc(20px + 0.24em);
+    font-size: 12px;
+    letter-spacing: 0.24em;
+  }
+}
+
+/* ---------- the journey: scroll plays the film ---------- */
+.journey {
+  position: relative;
+  background: var(--bd-bg);
+}
+
+.journey__stage {
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--bd-bg);
+}
+
+.journey__media {
+  position: absolute;
+  inset: 0;
+}
+
+.journey__media img,
+.journey__media video {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.journey__media video {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.journey.is-live .journey__media video {
+  opacity: 1;
+}
+
+.journey__shade {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 45%, transparent 45%, rgba(14, 16, 19, 0.5) 100%),
+    linear-gradient(to bottom, rgba(14, 16, 19, 0.45) 0%, transparent 20%, transparent 72%, var(--bd-bg) 100%);
+  pointer-events: none;
+}
+
+.journey__progress {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: color-mix(in srgb, var(--bd-ink) 12%, transparent);
+}
+.journey__progress span {
+  display: block;
+  height: 100%;
+  background: var(--bd-gold);
+  transform: scaleX(var(--p, 0));
+  transform-origin: left center;
+}
+
+.journey__route {
+  position: absolute;
+  z-index: 3;
+  top: calc(var(--bd-header-h) + env(safe-area-inset-top, 0px) + 12px);
+  right: clamp(16px, 4vw, 48px);
+  display: flex;
+  gap: 2px;
+}
+.journey__route button {
+  min-height: 44px;
+  padding: 0.6rem 0.85rem;
+  border: 0;
+  background: transparent;
+  color: var(--bd-muted);
+  font-family: var(--bd-label);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.journey__route button:hover,
+.journey__route button[aria-current="step"] {
+  color: var(--bd-ink);
+}
+.journey__route button[aria-current="step"] {
+  text-decoration: underline;
+  text-decoration-color: var(--bd-gold);
+  text-decoration-thickness: 0.15em;
+  text-underline-offset: 0.35em;
+}
+
+.journey__story {
+  position: relative;
+  z-index: 2;
+  margin-top: -100vh;
+  margin-top: -100dvh;
+  pointer-events: none;
+}
+
+.chapter {
+  position: relative;
+}
+
+.chapter__pin {
+  position: sticky;
+  top: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: calc(var(--bd-header-h) + 56px) max(clamp(20px, 6vw, 96px), env(safe-area-inset-right, 0px)) 64px
+    max(clamp(20px, 6vw, 96px), env(safe-area-inset-left, 0px));
+}
+.chapter[data-align="right"] .chapter__pin {
+  justify-content: flex-end;
+}
+
+.chapter__copy {
+  position: relative;
+  width: min(40rem, 48vw);
+  pointer-events: auto;
+}
+.chapter[data-align="right"] .chapter__copy {
+  width: min(34rem, 40vw);
+}
+.chapter__copy::before {
+  position: absolute;
+  z-index: -1;
+  inset: -3rem -5rem;
+  content: "";
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in srgb, var(--bd-bg) 88%, transparent) 0%,
+    color-mix(in srgb, var(--bd-bg) 58%, transparent) 52%,
+    transparent 76%
+  );
+  pointer-events: none;
+}
+
+.chapter__kicker {
+  max-width: 40ch;
+  margin: 0 0 1rem;
+  color: var(--bd-gold);
+  font-family: var(--bd-label);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.chapter__title {
+  max-width: 17ch;
+  margin: 0;
+  color: var(--bd-ink);
+  font-family: var(--bd-display);
+  font-size: clamp(2.2rem, 3.6vw, 3.9rem);
+  font-weight: 400;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+.chapter__body {
+  max-width: 40ch;
+  margin: 1.5rem 0 0;
+  color: var(--bd-muted);
+  font-family: var(--bd-body);
+  font-size: clamp(1.15rem, 1.45vw, 1.35rem);
+  line-height: 1.55;
+}
+
+.chapter__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.chapter__tags li {
+  padding: 0.45rem 0.7rem;
+  border: 1px solid color-mix(in srgb, var(--bd-gold) 45%, transparent);
+  color: var(--bd-ink);
+  font-family: var(--bd-label);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.chapter__actions {
+  margin-top: 2rem;
+}
+
+/* chapter 1 is the cover plate: stamp, caps, letter-spaced */
+#akte .chapter__title {
+  max-width: 11ch;
+  font-size: clamp(2.6rem, 5.2vw, 5.6rem);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.bd-stamp {
+  display: table;
+  margin: 0 0 0.9rem;
+  padding: 0.4em 0.8em 0.32em calc(0.8em + 0.42em);
+  border: 2px solid var(--bd-stamp);
+  color: var(--bd-stamp);
+  font-family: var(--bd-label);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  transform: rotate(-4deg);
+}
+#akte .chapter__body {
+  font-size: clamp(1.2rem, 1.7vw, 1.5rem);
+  font-style: italic;
+}
+
+.bd-akte-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.bd-cta-akte {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 54px;
+  padding: 0 28px 0 calc(28px + 0.22em);
+  background: var(--bd-gold);
+  box-shadow: 0 16px 40px -22px var(--bd-gold);
+  color: var(--bd-bg);
+  font-family: var(--bd-label);
+  font-size: 15px;
+  letter-spacing: 0.22em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background 0.2s, transform 0.2s;
+}
+.bd-cta-akte:hover {
+  background: var(--bd-gold-hi);
+  transform: translateY(-1px);
+}
+
+.bd-akte-note {
+  margin: 0;
+  color: var(--bd-muted);
+  font-family: var(--bd-label);
+  font-size: 10.5px;
+  letter-spacing: 0.2em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.bd-open-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 26px;
+}
+
+.bd-cta-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 52px;
+  padding: 0 22px 0 calc(22px + 0.22em);
+  border: 1px solid var(--bd-gold);
+  background: color-mix(in srgb, var(--bd-bg) 72%, transparent);
+  color: var(--bd-gold);
+  font-family: var(--bd-label);
+  font-size: 14px;
+  letter-spacing: 0.22em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background 0.2s, color 0.2s;
+}
+.bd-cta-open::after {
+  content: "\2192";
+  letter-spacing: 0;
+  transition: transform 0.2s;
+}
+.bd-cta-open:hover {
+  background: var(--bd-gold);
+  color: var(--bd-bg);
+}
+.bd-cta-open:hover::after {
+  transform: translateX(3px);
+}
+
+.bd-link-inhalt {
+  color: var(--bd-ink);
+  font-family: var(--bd-body);
+  font-size: 18px;
+  font-style: italic;
+  text-decoration: underline;
+  text-decoration-color: var(--bd-gold);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+}
+
+@media (max-width: 860px) {
+  .journey__route {
+    display: none;
+  }
+  /* portrait phones: lift the film so the book sits above the chapter copy */
+  .journey__media {
+    transform: translateY(-19%);
+  }
+  .chapter__pin,
+  .chapter[data-align="right"] .chapter__pin {
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 6.5rem max(1.25rem, env(safe-area-inset-right, 0px)) calc(3.5rem + env(safe-area-inset-bottom, 0px))
+      max(1.25rem, env(safe-area-inset-left, 0px));
+  }
+  .chapter__copy,
+  .chapter[data-align="right"] .chapter__copy {
+    width: min(100%, 36rem);
+  }
+  .chapter__copy::before {
+    inset: -3rem -2rem;
+    background: linear-gradient(
+      to top,
+      transparent 0%,
+      var(--bd-bg) 14%,
+      color-mix(in srgb, var(--bd-bg) 82%, transparent) 60%,
+      transparent 100%
+    );
+  }
+  .chapter__kicker {
+    margin-bottom: 0.7rem;
+    font-size: 10.5px;
+    letter-spacing: 0.24em;
+  }
+  .chapter__title {
+    max-width: 14ch;
+    font-size: clamp(1.9rem, 7.6vw, 2.7rem);
+  }
+  #akte .chapter__title {
+    font-size: clamp(2.1rem, 9.6vw, 3rem);
+  }
+  .bd-stamp {
+    margin-bottom: 0.7rem;
+    font-size: 12px;
+  }
+  .chapter__body {
+    margin-top: 1rem;
+    font-size: 1.12rem;
+  }
+  .chapter__actions {
+    margin-top: 1.25rem;
+  }
+  .bd-cta-akte {
+    min-height: 50px;
+    font-size: 14px;
+  }
+}
+
+/* ---------- the sections after the film ---------- */
+.bd-variant a {
+  color: var(--bd-gold);
+}
+
+.bd-variant--mobile {
+  max-width: 430px;
+  margin: 0 auto;
+}
+
+.bd-variant--desktop {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .bd-variant--mobile {
+    display: none;
+  }
+  .bd-variant--desktop {
+    display: block;
+  }
+}
+
+.kauf-hinweis {
+  margin: 4px 0 0;
+  color: var(--bd-paper-ink);
+  font-family: var(--bd-label);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  line-height: 1.6;
+}
+.kauf-hinweis span {
+  -webkit-user-select: all;
+  user-select: all;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .bd-cta-akte,
+  .bd-cta-open,
+  .bd-cta-open::after,
+  .journey__media video {
+    transition: none;
+  }
+}
