@@ -3,7 +3,7 @@
   "use strict";
 
   // Digistore24-Kauflink hier eintragen. Dann führen alle Kauf-Buttons direkt zur Kasse.
-  var KAUFLINK = "";
+  var KAUFLINK = "https://www.checkout-ds24.com/product/752800";
   var KONTAKT = "builtdifferently.book@gmail.com";
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
