@@ -640,3 +640,7 @@ img {
     transition: none;
   }
 }
+
+.bd-langs{display:flex;flex-wrap:wrap;justify-content:center;gap:0 14px;font-family:Oswald,sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:10px}
+.bd-langs a{display:inline-flex;align-items:center;min-height:44px;color:#A9A294;text-decoration:none}
+.bd-langs a[aria-current]{color:#C9A227}

@@ -9,6 +9,7 @@
     : "https://www.checkout-ds24.com/product/752800";
   var KONTAKT = "builtdifferently.book@gmail.com";
   var EN = (root.getAttribute("lang") || "").indexOf("en") === 0;
+  var SQ = (root.getAttribute("lang") || "").indexOf("sq") === 0;
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var portraitQuery = window.matchMedia("(orientation: portrait) and (max-width: 1024px)");
@@ -47,7 +48,7 @@
         note.className = "kauf-hinweis";
         note.setAttribute("role", "status");
         note.appendChild(
-          document.createTextNode(EN ? "Sales open very soon. Questions to " : "Der Verkauf startet in Kürze. Fragen an ")
+          document.createTextNode(EN ? "Sales open very soon. Questions to " : SQ ? "Shitja hapet shumë shpejt. Pyetje te " : "Der Verkauf startet in Kürze. Fragen an ")
         );
         var mail = document.createElement("span");
         mail.textContent = KONTAKT;
