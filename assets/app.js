@@ -93,6 +93,7 @@
   var stillImg = journey.querySelector(".journey__media img");
   var stillSource = journey.querySelector(".journey__media source");
   var bar = journey.querySelector(".journey__progress");
+  var stage = journey.querySelector(".journey__stage");
   var chapters = Array.prototype.slice.call(journey.querySelectorAll(".chapter"));
   var routeButtons = Array.prototype.slice.call(journey.querySelectorAll(".journey__route button"));
 
@@ -110,7 +111,8 @@
 
   function scrollState() {
     var rect = journey.getBoundingClientRect();
-    var total = Math.max(1, journey.offsetHeight - window.innerHeight);
+    // Höhe der Bühne statt window.innerHeight: bleibt gleich, wenn die Browserleiste beim Scrollen ein- und ausfährt
+    var total = Math.max(1, journey.offsetHeight - (stage ? stage.offsetHeight : window.innerHeight));
     var scrolled = Math.min(Math.max(-rect.top, 0), total);
     var n = chapters.length;
     var index = n - 1;

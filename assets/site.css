@@ -235,7 +235,7 @@ img {
   top: 0;
   z-index: 0;
   height: 100vh;
-  height: 100dvh;
+  height: 100lvh;
   overflow: hidden;
   background: var(--bd-bg);
 }
@@ -323,7 +323,7 @@ img {
   position: relative;
   z-index: 2;
   margin-top: -100vh;
-  margin-top: -100dvh;
+  margin-top: -100lvh;
   pointer-events: none;
 }
 
@@ -338,7 +338,7 @@ img {
   display: flex;
   align-items: center;
   min-height: 100vh;
-  min-height: 100dvh;
+  min-height: 100svh;
   padding: calc(var(--bd-header-h) + 56px) max(clamp(20px, 6vw, 96px), env(safe-area-inset-right, 0px)) 64px
     max(clamp(20px, 6vw, 96px), env(safe-area-inset-left, 0px));
 }
