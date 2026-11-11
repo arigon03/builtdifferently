@@ -112,7 +112,8 @@
   function scrollState() {
     var rect = journey.getBoundingClientRect();
     // Höhe der Bühne statt window.innerHeight: bleibt gleich, wenn die Browserleiste beim Scrollen ein- und ausfährt
-    var total = Math.max(1, journey.offsetHeight - (stage ? stage.offsetHeight : window.innerHeight));
+    var fixedVh = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--bd-vh")) * 100;
+    var total = Math.max(1, journey.offsetHeight - (fixedVh || (stage ? stage.offsetHeight : window.innerHeight)));
     var scrolled = Math.min(Math.max(-rect.top, 0), total);
     var n = chapters.length;
     var index = n - 1;

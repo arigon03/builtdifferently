@@ -338,7 +338,7 @@ img {
   display: flex;
   align-items: center;
   min-height: 100vh;
-  min-height: 100svh;
+  min-height: calc(var(--bd-vh, 1svh) * 100);
   padding: calc(var(--bd-header-h) + 56px) max(clamp(20px, 6vw, 96px), env(safe-area-inset-right, 0px)) 64px
     max(clamp(20px, 6vw, 96px), env(safe-area-inset-left, 0px));
 }
