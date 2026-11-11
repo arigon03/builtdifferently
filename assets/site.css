@@ -644,3 +644,63 @@ img {
 .bd-langs{display:flex;flex-wrap:wrap;justify-content:center;gap:0 14px;font-family:Oswald,sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:10px}
 .bd-langs a{display:inline-flex;align-items:center;min-height:44px;color:#A9A294;text-decoration:none}
 .bd-langs a[aria-current]{color:#C9A227}
+
+/* ---------- Reichweite: wischbares Reel-Karussell ---------- */
+.bd-reels {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.bd-reels::-webkit-scrollbar {
+  display: none;
+}
+.bd-reel {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-decoration: none;
+  scroll-snap-align: start;
+}
+.bd-reels--m {
+  gap: 14px;
+  padding: 0 28px;
+  scroll-padding: 0 28px;
+}
+.bd-reels--m .bd-reel {
+  width: 62%;
+}
+.bd-reels--d {
+  gap: 28px;
+}
+.bd-reels--d .bd-reel {
+  width: calc((100% - 3 * 28px) / 3.5);
+  gap: 10px;
+}
+.bd-reels-btn {
+  width: 48px;
+  height: 48px;
+  border: 1px solid #3A3220;
+  background: transparent;
+  color: #C9A227;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+.bd-reels-btn:hover,
+.bd-reels-btn:focus-visible {
+  border-color: #C9A227;
+}
+.bd-reels-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.bd-shots {
+  align-items: flex-start;
+}
+.bd-reels--m .bd-shot {
+  width: 74%;
+}

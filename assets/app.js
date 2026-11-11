@@ -291,3 +291,35 @@
     window.addEventListener("load", load);
   }
 })();
+
+/* ---------- Reichweite: Pfeile für das Reel-Karussell (Desktop) ---------- */
+(function () {
+  function init() {
+    document.querySelectorAll("#reichweite-d").forEach(function (sec) {
+      var track = sec.querySelector(".bd-reels");
+      var btns = sec.querySelectorAll(".bd-reels-btn");
+      if (!track || !btns.length) return;
+      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      function update() {
+        var max = track.scrollWidth - track.clientWidth - 2;
+        btns[0].disabled = track.scrollLeft <= 2;
+        btns[1].disabled = track.scrollLeft >= max;
+      }
+      btns.forEach(function (b) {
+        b.addEventListener("click", function () {
+          var card = track.querySelector(".bd-reel");
+          var step = card ? card.getBoundingClientRect().width + 28 : track.clientWidth * 0.8;
+          track.scrollBy({ left: step * Number(b.getAttribute("data-dir")), behavior: reduce ? "auto" : "smooth" });
+        });
+      });
+      track.addEventListener("scroll", update, { passive: true });
+      window.addEventListener("resize", update);
+      update();
+    });
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
