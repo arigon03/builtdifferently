@@ -749,3 +749,17 @@ img {
     margin-top: 0.7rem;
   }
 }
+
+/* ---------- Buchseiten und Tafeln zum Wischen, Durchblätter-Video ---------- */
+.bd-reels--m .bd-seite {
+  width: 68%;
+}
+.bd-reels--d .bd-seite {
+  width: calc((100% - 3 * 28px) / 3.6);
+}
+div.bd-reel {
+  cursor: default;
+}
+video.bd-handy {
+  background: #0e1013;
+}

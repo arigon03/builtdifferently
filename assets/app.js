@@ -298,7 +298,7 @@
 /* ---------- Reichweite: Pfeile für das Reel-Karussell (Desktop) ---------- */
 (function () {
   function init() {
-    document.querySelectorAll("#reichweite-d").forEach(function (sec) {
+    document.querySelectorAll("#reichweite-d, [data-karussell]").forEach(function (sec) {
       var track = sec.querySelector(".bd-reels");
       var btns = sec.querySelectorAll(".bd-reels-btn");
       if (!track || !btns.length) return;
@@ -325,4 +325,69 @@
   } else {
     init();
   }
+})();
+
+/* Durchblätter-Video auf dem Handy-Bild: lädt erst kurz vor dem Sichtbereich und läuft nur, solange es zu sehen ist. */
+(function () {
+  "use strict";
+  var vids = Array.prototype.slice.call(document.querySelectorAll("video.bd-handy"));
+  if (!vids.length || !("IntersectionObserver" in window)) {
+    return;
+  }
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return;
+  }
+  function play(v) {
+    var p = v.play();
+    if (p && p.catch) {
+      p.catch(function () {});
+    }
+  }
+  function load(v) {
+    var src = v.getAttribute("data-src");
+    var set = function (url) {
+      v.src = url;
+      v.load();
+      play(v);
+    };
+    v.muted = true;
+    if (window.fetch && window.URL && URL.createObjectURL) {
+      fetch(src)
+        .then(function (r) {
+          if (!r.ok) {
+            throw new Error("HTTP " + r.status);
+          }
+          return r.blob();
+        })
+        .then(function (blob) {
+          set(URL.createObjectURL(blob));
+        })
+        .catch(function () {
+          set(src);
+        });
+    } else {
+      set(src);
+    }
+  }
+  var io = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (e) {
+        var v = e.target;
+        if (e.isIntersecting) {
+          if (!v.getAttribute("data-geladen")) {
+            v.setAttribute("data-geladen", "1");
+            load(v);
+          } else {
+            play(v);
+          }
+        } else if (!v.paused) {
+          v.pause();
+        }
+      });
+    },
+    { rootMargin: "200px 0px" }
+  );
+  vids.forEach(function (v) {
+    io.observe(v);
+  });
 })();
